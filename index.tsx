@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import { render } from 'react-dom';
 import Hello from './Hello';
 import './style.css';
 
-interface AppProps { }
+interface AppProps {}
 interface AppState {
   name: string;
 }
 
-class App extends Component<AppProps, AppState> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: 'React'
-    };
-  }
+const App: React.FC = props => {
+  const [name, setName] = useState('react');
 
-  render() {
-    return (
-      <div>
-        <Hello name={this.state.name} />
-        <p>
-          Start editing to see some magic happen :)
-        </p>
-      </div>
-    );
-  }
-}
+  useEffect(() => {
+    //
+  }, []);
+
+  const handleUserNameChange = newName => {
+    setName(newName.target.value);
+  };
+
+  return (
+    <div>
+      <Hello name={name} />
+      <p>Start editing to see some magic happen :)</p>
+      <input type="text" name="username" onChange={handleUserNameChange} />
+    </div>
+  );
+};
 
 render(<App />, document.getElementById('root'));
